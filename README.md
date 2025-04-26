@@ -2,7 +2,8 @@
 
 A comprehensive health monitoring system using NodeMCU ESP8266 that collects various health metrics including heart rate, blood oxygen, temperature, blood pressure, blood sugar, activity tracking, and sleep quality.
 
-![System Design](public/Design.jpeg)
+![System Design](Public/Design.jpeg)
+
 
 ## Components
 
@@ -58,32 +59,32 @@ A comprehensive health monitoring system using NodeMCU ESP8266 that collects var
 ## User Interface
 
 ### Dashboard
-![Dashboard](public/Dashboard.jpeg)
+![Dashboard](Public/Dashboard.jpeg)
 
 The dashboard provides a comprehensive overview of all health metrics in real-time.
 
 ### Vital Signs
-![Vital Signs](public/Vital.jpeg)
+![Vital Signs](Public/Vital.jpeg)
 
 Monitor your vital signs including heart rate, blood pressure, and temperature.
 
 ### Records
-![Records](public/Records.jpeg)
+![Records](Public/Records.jpeg)
 
 View historical data and track your health progress over time.
 
 ### Appointments
-![Appointments](public/Appointments.jpeg)
+![Appointments](Public/Appointments.jpeg)
 
 Schedule and manage your medical appointments.
 
 ### Settings
-![Settings](public/Settings.jpeg)
+![Settings](Public/Settings.jpeg)
 
 Configure system settings and preferences.
 
 ### Support
-![Support](public/Support.jpeg)
+![Support](Public/Support.jpeg)
 
 Access help and support resources.
 
