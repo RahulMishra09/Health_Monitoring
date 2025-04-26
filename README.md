@@ -1,206 +1,185 @@
-# Health Monitoring System 
+# Health Monitoring System
 
-A comprehensive health monitoring system that collects, processes, and analyzes health metrics in real-time using Raspberry Pi and NodeMCU.
+A comprehensive health monitoring system using NodeMCU ESP8266 that collects various health metrics including heart rate, blood oxygen, temperature, blood pressure, blood sugar, activity tracking, and sleep quality.
+
+![System Design](public/Design.jpeg)
+
+## Components
+
+### Hardware Requirements
+- NodeMCU ESP8266
+- MAX30100 Pulse Oximeter
+- Adafruit MLX90614 Infrared Temperature Sensor
+- Adafruit ADS1115 ADC (for blood pressure and sugar measurements)
+- Power supply (5V)
+- Connecting wires
+
+### Software Requirements
+- Arduino IDE
+- Required Libraries:
+  - ESP8266WiFi
+  - Wire
+  - ArduinoJson
+  - MAX30100_PulseOximeter
+  - Adafruit_MLX90614
+  - Adafruit_ADS1X15
 
 ## Features
 
-### 1. Health Metrics Monitoring
-- **Heart Rate Monitoring**
-  - Real-time heart rate measurement
-  - BPM tracking with threshold alerts
-  - Trend analysis for heart rate patterns
+1. **Heart Rate Monitoring**
+   - Real-time heart rate measurement
+   - Beat detection and tracking
 
-- **Blood Oxygen (SpO2) Monitoring**
-  - Continuous SpO2 level tracking
-  - Low oxygen level alerts
-  - Oxygen saturation trend analysis
+2. **Blood Oxygen (SpO2)**
+   - Continuous oxygen saturation monitoring
+   - Accurate readings through MAX30100 sensor
 
-- **Temperature Monitoring**
-  - Body temperature tracking
-  - Fever detection and alerts
-  - Temperature trend monitoring
+3. **Temperature Monitoring**
+   - Non-contact temperature measurement
+   - Uses MLX90614 infrared sensor
 
-- **Blood Pressure Monitoring**
-  - Systolic and diastolic pressure tracking
-  - High blood pressure alerts
-  - Blood pressure trend analysis
+4. **Blood Pressure**
+   - Systolic and diastolic pressure monitoring
+   - Simulated readings (requires proper BP sensor for production)
 
-- **Blood Sugar Monitoring**
-  - Glucose level tracking
-  - High blood sugar alerts
-  - Sugar level trend monitoring
+5. **Blood Sugar**
+   - Glucose level monitoring
+   - Simulated readings (requires proper glucose sensor for production)
 
-- **Activity Tracking**
-  - Step counting
-  - Calorie estimation
-  - Distance tracking
-  - Activity patterns analysis
+6. **Activity Tracking**
+   - Step counting
+   - Calorie calculation
+   - Distance tracking
 
-- **Sleep Monitoring**
-  - Sleep quality assessment
-  - Sleep duration tracking
-  - Sleep pattern analysis
+7. **Sleep Quality Monitoring**
+   - Sleep quality assessment
+   - Duration tracking
 
-### 2. Data Processing and Analysis
-- **Real-time Data Collection**
-  - Continuous sensor data acquisition
-  - Timestamp synchronization
-  - Data validation and cleaning
+## User Interface
 
-- **Advanced Data Preprocessing**
-  - Moving average smoothing
-  - Noise reduction algorithms
-  - Data normalization
+### Dashboard
+![Dashboard](public/Dashboard.jpeg)
 
-- **Trend Analysis**
-  - Pattern recognition
-  - Trend detection (increasing/decreasing/stable)
-  - Historical data comparison
+The dashboard provides a comprehensive overview of all health metrics in real-time.
 
-- **Anomaly Detection**
-  - Statistical anomaly detection
-  - Sudden change alerts
-  - Sensor error detection
+### Vital Signs
+![Vital Signs](public/Vital.jpeg)
 
-### 3. Alert System
-- **Smart Alert Generation**
-  - Threshold-based alerts
-  - Trend-based warnings
-  - Anomaly notifications
+Monitor your vital signs including heart rate, blood pressure, and temperature.
 
-- **Alert Categories**
-  - Warning alerts for minor deviations
-  - Danger alerts for critical conditions
-  - Information alerts for trends
+### Records
+![Records](public/Records.jpeg)
 
-- **Alert Context**
-  - Current value
-  - Historical trend
-  - Anomaly status
-  - Recommended actions
+View historical data and track your health progress over time.
 
-### 4. Real-time Monitoring
-- **Live Data Streaming**
-  - WebSocket-based real-time updates
-  - Low-latency data transmission
-  - Bidirectional communication
+### Appointments
+![Appointments](public/Appointments.jpeg)
 
-- **Dashboard Display**
-  - Real-time metric visualization
-  - Interactive charts and graphs
-  - Customizable views
+Schedule and manage your medical appointments.
 
-### 5. Data Storage and Management
-- **Secure Data Storage**
-  - MongoDB database integration
-  - Data encryption
-  - Backup systems
+### Settings
+![Settings](public/Settings.jpeg)
 
-- **Data Retrieval**
-  - Historical data access
-  - Custom date range queries
-  - Data export capabilities
+Configure system settings and preferences.
 
-### 6. User Interface
-- **Responsive Dashboard**
-  - Real-time metric display
-  - Alert notifications
-  - Trend visualization
+### Support
+![Support](public/Support.jpeg)
 
-- **User Management**
-  - Secure authentication
-  - User profiles
-  - Access control
+Access help and support resources.
 
-## Technical Specifications
-
-### Hardware Requirements
-- Raspberry Pi (Model 3B+ or higher)
-- NodeMCU ESP8266
-- Health Sensors:
-  - MAX30100 Pulse Oximeter
-  - MLX90614 Temperature Sensor
-  - ADS1115 ADC
-  - Additional health monitoring sensors
-
-### Software Requirements
-- Python 3.8+
-- Node.js 14+
-- MongoDB 4.4+
-- Required Python Packages:
-  - numpy
-  - pyserial
-  - python-socketio
-  - requests
-  - python-dotenv
-
-## Installation
+## Setup Instructions
 
 1. **Hardware Setup**
-   ```bash
-   # Connect sensors to NodeMCU
-   # Connect NodeMCU to Raspberry Pi via USB
-   ```
+   - Connect the MAX30100 sensor to the NodeMCU
+   - Connect the MLX90614 sensor to the I2C pins
+   - Connect the ADS1115 to the I2C pins
+   - Ensure proper power supply to all components
 
 2. **Software Setup**
-   ```bash
-   # Clone the repository
-   git clone https://github.com/yourusername/Health_Monitoring.git
+   - Install Arduino IDE
+   - Install required libraries
+   - Configure WiFi credentials in the code:
+     ```cpp
+     const char* ssid = "YOUR_WIFI_SSID";
+     const char* password = "YOUR_WIFI_PASSWORD";
+     ```
+   - Upload the code to NodeMCU
 
-   # Install backend dependencies
-   cd backend
-   npm install
+## Data Format
 
-   # Install Python dependencies
-   pip install -r requirements.txt
-   ```
+The system outputs JSON data with the following structure:
 
-3. **Configuration**
-   ```bash
-   # Set up environment variables
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
-
-4. **Running the System**
-   ```bash
-   # Start the backend server
-   npm run dev
-
-   # Start the data collector
-   python sensor_data_collector.py
-   ```
+```json
+{
+  "deviceId": "NODEMCU_001",
+  "heartRate": 75,
+  "spo2": 98,
+  "temperature": 36.5,
+  "bloodPressure": {
+    "systolic": 120,
+    "diastolic": 80
+  },
+  "bloodSugar": 100,
+  "activity": {
+    "steps": 1000,
+    "calories": 40,
+    "distance": 0.762
+  },
+  "sleep": {
+    "quality": 85,
+    "duration": 0
+  }
+}
+```
 
 ## Usage
 
-1. **Access the Dashboard**
-   - Open web browser
-   - Navigate to `http://localhost:3000`
+1. Power on the device
+2. Wait for WiFi connection (indicated by serial output)
+3. The device will automatically start collecting and transmitting data every 5 seconds
+4. Monitor the serial output for health metrics
 
-2. **Monitor Health Metrics**
-   - View real-time data
-   - Check alerts and notifications
-   - Analyze trends and patterns
+## Important Notes
 
-3. **Configure Alerts**
-   - Set threshold values
-   - Customize alert preferences
-   - Manage notification settings
+- Some measurements (blood pressure, blood sugar, steps, sleep quality) are currently simulated and require proper sensors for production use
+- Ensure proper calibration of sensors before use
+- Maintain appropriate distance for temperature measurements
+- Keep the device in a stable environment for accurate readings
 
-## Contributing
+## Safety Considerations
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+- This is a prototype system and should not be used for medical diagnosis
+- Always consult healthcare professionals for medical advice
+- Ensure proper sanitization of sensors between uses
+- Keep the device away from water and extreme temperatures
+
+## Troubleshooting
+
+1. **WiFi Connection Issues**
+   - Check WiFi credentials
+   - Ensure proper signal strength
+   - Verify network availability
+
+2. **Sensor Reading Issues**
+   - Check sensor connections
+   - Verify power supply
+   - Ensure proper sensor placement
+
+3. **Data Transmission Issues**
+   - Check serial output
+   - Verify JSON formatting
+   - Ensure proper baud rate (115200)
+
+## Future Improvements
+
+- Integration with cloud services
+- Mobile app development
+- Real-time alerts and notifications
+- Historical data analysis
+- Machine learning for health predictions
+- Integration with medical databases
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is open-source and available under the MIT License.
 
-## Support
-
-For support, please open an issue in the GitHub repository or contact the development team.
-
-## Acknowledgments
-
-- Thanks to all contributors
-- Special thanks to the open-source community
-- Inspired by healthcare monitoring needs
